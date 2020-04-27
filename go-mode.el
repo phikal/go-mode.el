@@ -1861,8 +1861,13 @@ with goflymake (see URL `https://github.com/dougm/goflymake'), gocode
         ;; negative), deleting lines increments it. This order
         ;; simplifies the forward-line invocations.
         (line-offset 0)
-        (column (current-column)))
+        (column (current-column))
+        looking-at)
     (save-excursion
+      (skip-syntax-forward " ")
+      (setq looking-at (buffer-substring
+                        (point)
+                        (+ (point) (skip-syntax-forward "w(\"/-."))))
       (with-current-buffer patch-buffer
         (goto-char (point-min))
         (while (not (eobp))
@@ -1889,7 +1894,12 @@ with goflymake (see URL `https://github.com/dougm/goflymake'), gocode
                 (go--delete-whole-line len)))
              (t
               (error "Invalid rcs patch or internal error in go--apply-rcs-patch")))))))
-    (move-to-column column)))
+    (goto-char (line-end-position))
+    (cond ((looking-at-p "^[[:space:]]*$")
+           (move-to-column column t))
+          ((and (not (string= looking-at ""))
+                (search-backward looking-at (line-beginning-position) t)))
+          (t (move-to-column column)))))
 
 (defun gofmt--is-goimports-p ()
   (string-equal (file-name-base gofmt-command) "goimports"))
