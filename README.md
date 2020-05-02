@@ -75,14 +75,13 @@ the following extra features to provide an improved experience:
 
 ## MELPA
 
-The recommended way of installing go-mode is via
-[ELPA](http://www.emacswiki.org/emacs/ELPA), the Emacs package
-manager, and the
-[MELPA Stable repository](http://emacsredux.com/blog/2014/05/16/melpa-stable/), which provides
-an up-to-date version of go-mode.
+The recommended way of installing go-mode is via `package.el`, the
+Emacs package manager, and the [MELPA Stable
+repository](https://stable.melpa.org/#/go-mode), which provides an
+up-to-date version of go-mode.
 
-If you're not familiar with ELPA yet, consider reading
-[this guide](http://ergoemacs.org/emacs/emacs_package_system.html).
+If you're not familiar with `package.el` yet, consider reading [this
+guide](http://ergoemacs.org/emacs/emacs_package_system.html).
 
 ## Manual
 
